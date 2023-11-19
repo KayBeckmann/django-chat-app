@@ -13,3 +13,10 @@ class Message(models.Model):
 
   def __str__(self): #Overview in adminpanel
     return f"{self.created_at}: {self.author} -> {self.text} "
+
+
+class Chat(models.Model):
+  created_at = DateField(default=date.today)
+
+  def __str__(self): #Overview in adminpanel
+    return f"{self.created_at}"

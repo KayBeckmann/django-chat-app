@@ -1,4 +1,11 @@
-<form action="">
-  <input type="text" placeholder="Chatnachricht">
+<h1>Chatroom {{request.user}}</h1>
+
+{% if request.user.is_authenticated %}
+<div>Du bist eingeloggt</div>
+{% endif %}
+
+<form action="/chat/" method="post">
+  {% csrf_token %}
+  <input name="message" type="text" placeholder="Chatnachricht">
   <button>Send</button>
 </form>
