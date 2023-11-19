@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Log in</h1>
 
-<form action="/login/" method="post">
+<h1>Register</h1>
+
+<form action="/register/" method="post">
   {% csrf_token %}
-  <input type="hidden" name="redirect" value=" {{ redirect }}">
   <div>
     <label for="user">User</label>
     <input type="text" placeholder="User" name="username">
@@ -13,13 +13,13 @@
     <label for="password">Password</label>
     <input type="password" placeholder="Password" name="password">
   </div>
-  <button>Login</button>
+  <div>
+    <label for="retypepassword">Password</label>
+    <input type="password" placeholder="Password" name="retypepassword">
+  </div>
+  <button>Register</button>
 </form>
 
-<div>Noch nicht dabei? Dann <a href="/register/">Registriere</a> dich!</div>
-
-{% if error %}
-<div class="red">Bitte prüfe Deine Eingabe, es gab einen Fehler.</div>
-{% endif %}
+<div>zurück zum <a href="/login/">Login</a></div>
 
 {% endblock %}

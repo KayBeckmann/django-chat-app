@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from .models import Message
 from .models import Chat
 
@@ -34,3 +35,11 @@ def loginView(request):
       return render(request, 'chat/login.html', {'error': True, 'redirect': redirect})
 
   return render(request, 'chat/login.html', {'redirect': redirect})
+
+def registerView(request):
+  if request.method == 'POST':
+    user = User.objects.create_user(username=request.POST.get('username'), password=request.POST.get('password'))
+    login(request, user)
+    return HttpResponseRedirect('/chat/')
+
+  return render(request, 'chat/register.html')
