@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from .models import Message
 from .models import Chat
 
 # Create your views here.
+@login_required(login_url='/login/')
 def index(request):
   if request.method == 'POST':
     myChat = Chat.objects.get(id=1)
@@ -20,6 +22,8 @@ def index(request):
   
 
 def loginView(request):
+  redirect = request.GET.get('next')
+
   if request.method == 'POST':
     user = authenticate(username = request.POST.get('username'), password = request.POST.get('password'))
     
@@ -27,6 +31,6 @@ def loginView(request):
       login(request, user)
       return HttpResponseRedirect('/chat/')
     else:
-      return render(request, 'chat/login.html', {'error': True})
+      return render(request, 'chat/login.html', {'error': True, 'redirect': redirect})
 
-  return render(request, 'chat/login.html')
+  return render(request, 'chat/login.html', {'redirect': redirect})

@@ -1,7 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
 <h1>Log in</h1>
 
 <form action="/login/" method="post">
   {% csrf_token %}
+  <input type="hidden" name="redirect" value=" {{ redirect }}">
   <div>
     <label for="user">User</label>
     <input type="text" placeholder="User" name="username">
@@ -14,5 +17,7 @@
 </form>
 
 {% if error %}
-<div>Bitte prüfe Deine Eingabe, es gab einen Fehler.</div>
+<div class="red">Bitte prüfe Deine Eingabe, es gab einen Fehler.</div>
 {% endif %}
+
+{% endblock %}
