@@ -1,0 +1,18 @@
+<h1>Log in</h1>
+
+<form action="/login/" method="post">
+  {% csrf_token %}
+  <div>
+    <label for="user">User</label>
+    <input type="text" placeholder="User" name="username">
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input type="password" placeholder="Password" name="password">
+  </div>
+  <button>Login</button>
+</form>
+
+{% if error %}
+<div>Bitte prüfe Deine Eingabe, es gab einen Fehler.</div>
+{% endif %}
